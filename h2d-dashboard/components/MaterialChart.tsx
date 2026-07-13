@@ -1,45 +1,63 @@
 "use client";
 
-import {
-  PieChart,
-  Pie,
-  Cell,
-  ResponsiveContainer,
-} from "recharts";
+type Props = {
+  material: string;
+  available: number;
+  printId: string;
+  completed: number;
+  total: number;
+};
 
-const data = [
-  { name: "PETG", value: 40 },
-  { name: "PLA", value: 30 },
-  { name: "ABS", value: 20 },
-  { name: "TPU", value: 10 },
-];
-
-const COLORS = [
-  "#22c55e",
-  "#3b82f6",
-  "#f59e0b",
-  "#ef4444",
-];
-
-export default function MaterialChart() {
+export default function MaterialChart({
+  material,
+  available,
+  printId,
+  completed,
+  total,
+}: Props) {
   return (
-    <div className="h-56">
-      <ResponsiveContainer>
-        <PieChart>
-          <Pie
-            data={data}
-            dataKey="value"
-            outerRadius={80}
-          >
-            {data.map((_, index) => (
-              <Cell
-                key={index}
-                fill={COLORS[index]}
-              />
-            ))}
-          </Pie>
-        </PieChart>
-      </ResponsiveContainer>
+    <div className="space-y-4">
+
+      <div>
+        <p className="text-slate-400 text-sm">
+          Material Actual
+        </p>
+
+        <h2 className="text-2xl font-bold text-white">
+          {material}
+        </h2>
+      </div>
+
+      <div>
+        <p className="text-slate-400 text-sm">
+          Disponible
+        </p>
+
+        <h2 className="text-2xl font-bold text-green-500">
+          {available} g
+        </h2>
+      </div>
+
+      <div>
+        <p className="text-slate-400 text-sm">
+          Producción
+        </p>
+
+        <h2 className="text-xl font-bold text-cyan-400">
+          {completed}/{total}
+        </h2>
+      </div>
+
+      <div>
+        <p className="text-slate-400 text-sm">
+          Print ID
+        </p>
+
+        <h2 className="text-xl font-bold text-white">
+          #{printId}
+        </h2>
+      </div>
+
     </div>
   );
 }
